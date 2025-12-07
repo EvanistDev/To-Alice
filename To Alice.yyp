@@ -11,6 +11,7 @@
   "defaultScriptType":1,
   "Folders":[
     {"$GMFolder":"","%Name":"Objects","folderPath":"folders/Objects.yy","name":"Objects","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Controller","folderPath":"folders/Objects/Controller.yy","name":"Controller","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Rooms","folderPath":"folders/Rooms.yy","name":"Rooms","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Sprites","folderPath":"folders/Sprites.yy","name":"Sprites","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
@@ -24,12 +25,14 @@
   "name":"To Alice",
   "resources":[
     {"id":{"name":"Eva Notes","path":"notes/Eva Notes/Eva Notes.yy",},},
+    {"id":{"name":"GAMECONTROLLER","path":"objects/GAMECONTROLLER/GAMECONTROLLER.yy",},},
     {"id":{"name":"oActionButton","path":"objects/oActionButton/oActionButton.yy",},},
     {"id":{"name":"oCombatSystem","path":"objects/oCombatSystem/oCombatSystem.yy",},},
     {"id":{"name":"oGenericEnemy","path":"objects/oGenericEnemy/oGenericEnemy.yy",},},
     {"id":{"name":"oMouse","path":"objects/oMouse/oMouse.yy",},},
     {"id":{"name":"oPlayer","path":"objects/oPlayer/oPlayer.yy",},},
-    {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"id":{"name":"rCombat","path":"rooms/rCombat/rCombat.yy",},},
+    {"id":{"name":"rTest","path":"rooms/rTest/rTest.yy",},},
     {"id":{"name":"sActionButton","path":"sprites/sActionButton/sActionButton.yy",},},
     {"id":{"name":"sIndicator","path":"sprites/sIndicator/sIndicator.yy",},},
     {"id":{"name":"sMouse","path":"sprites/sMouse/sMouse.yy",},},
@@ -39,7 +42,8 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"roomId":{"name":"rTest","path":"rooms/rTest/rTest.yy",},},
+    {"roomId":{"name":"rCombat","path":"rooms/rCombat/rCombat.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

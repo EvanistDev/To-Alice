@@ -1,0 +1,1 @@
+Toda nova sala colocar no script de criação da sala que ------> global.inCombat = false <------

@@ -7,7 +7,9 @@
 
 	var moveDirX = lengthdir_x(len, dir)
 	var moveDirY = lengthdir_y(len, dir)
-
-	x += moveDirX
-	y += moveDirY
+	
+	if (not global.inCombat) {
+		x += moveDirX
+		y += moveDirY
+	}
 #endregion

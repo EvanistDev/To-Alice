@@ -6,7 +6,7 @@ playerStatus = {
 	defense: 0,
 }
 
-spd = 5  
+spd = 8 
 ActionTime = false
 
 #region Combat Functions

@@ -1,12 +1,18 @@
-if (ActionTime and oCombatSystem.actionCooldown == oCombatSystem.actionCooldownMAX) {
-	if attackCooldown <= 0 {
-		attackCooldown = attackCooldownMax
-		if (ATTACKMAX >= 5 or random(100) <= 3) {
-			SecoundAttack()
-			ATTACKMAX = 0
+#region attack combat
+	if (ActionTime and oCombatSystem.actionCooldown == oCombatSystem.actionCooldownMAX and global.inCombat) {
+		if (attackCooldown <= 0) {
+			attackCooldown = attackCooldownMax
+		
+			if (maxAttack > EnemyStatus.maxAttackCooldown -1 or irandom(100) <= 15) {
+				SecoundAttack()
+				maxAttack = 0
+			} else
+				fristAttack()
+			
+			oCombatSystem.turnChange()
 		} else
-			fristAttack()
-		oCombatSystem.turnChange()
-	} else
-		attackCooldown--
-}
+			attackCooldown--
+	}
+#endregion
+
+enemyState()
