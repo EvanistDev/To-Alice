@@ -1,3 +1,12 @@
+if (global.dialogue_manager.active) exit;
+
+// Test Code Remove Me
+if (keyboard_check_pressed(vk_space)) {
+	create_dialogue("intro", function() {
+    show_debug_message("Dialogue finished!");
+});
+}
+
 #region Movimentação
 	var _eixoX = keyboard_check(ord("D")) - keyboard_check(ord("A"))
 	var _eixoY = keyboard_check(ord("S")) - keyboard_check(ord("W"))

@@ -1,0 +1,38 @@
+{
+  "intro": [
+    {
+      "name": "Alice",
+      "msg": "Welcome to the game!",
+      "sprite": "sPlayer"
+    },
+    {
+      "name": "Bob",
+      "msg": "Thanks! Excited to start!",
+      "sprite": "sSlime"
+    }
+  ],
+  "quest1": [
+    {
+      "name": "NPC",
+      "msg": "Find 10 apples.",
+      "sprite": "sPlayer"
+    },
+    {
+      "name": "NPC",
+      "msg": "Return to me when done.",
+      "sprite": "sSlime"
+    }
+  ],
+  "ending": [
+    {
+      "name": "Alice",
+      "msg": "You did it!",
+      "sprite": "sSlime"
+    },
+    {
+      "name": "Bob",
+      "msg": "Congratulations!",
+      "sprite": "sPlayer"
+    }
+  ]
+}
