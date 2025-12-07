@@ -1,4 +1,4 @@
-function create_dialogue(messages, onFinished) {
+function create_dialogue(name, onFinished) {
 	var _inst = undefined;
     if (!instance_exists(oDialogue)) {
         _inst = instance_create_depth(0, 0, 0, oDialogue);
@@ -6,5 +6,5 @@ function create_dialogue(messages, onFinished) {
         _inst = oDialogue;
     }
 	
-    _inst.dialogue_manager.start(messages, onFinished);
+    _inst.dialogue_manager.start(name, onFinished);
 }
