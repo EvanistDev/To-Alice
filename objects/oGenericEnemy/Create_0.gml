@@ -1,4 +1,4 @@
-EnemyStatus = {
+status = {
 	name: "",
 	hp: 0,
 	hpMax: 0,
@@ -19,6 +19,13 @@ attackCooldown = attackCooldownMax
 ActionTime = false
 maxAttack = 0
 detectPlayer = 200
+escape = false
+
+for (var i = 0; i < array_length(GAMECONTROLLER.enemydefeated); i++) {
+	var _defeated = GAMECONTROLLER.enemydefeated[i]
+	if (_defeated.id == id)
+		instance_destroy()
+}
 
 #region Enemy Type
 	enum EnemyType {
@@ -28,9 +35,9 @@ detectPlayer = 200
 		snowman,
 	}
 	
-	newEnemyStatus = []
+	newstatus = []
 	
-	newEnemyStatus[EnemyType.slimeCommon] = {
+	newstatus[EnemyType.slimeCommon] = {
 		name: "Slime Common",
 		hpMax: 100,
 		damage: 10,
@@ -42,105 +49,139 @@ detectPlayer = 200
 		maxAttackCooldown: 5
 	}
 	
-	function updateStatus() {
-		var _enemy = newEnemyStatus[EnemyType.slimeCommon]
-		EnemyStatus.name = _enemy.name
-		EnemyStatus.hp = _enemy.hpMax
-		EnemyStatus.hpMax = _enemy.hpMax
-		EnemyStatus.damage = _enemy.damage
-		EnemyStatus.defense = _enemy.defense
-		EnemyStatus.color = _enemy.color
-		EnemyStatus.spd = _enemy.spd
-		EnemyStatus.atk1Name = _enemy.atk1Name
-		EnemyStatus.atk2Name = _enemy.atk2Name
-		EnemyStatus.maxAttackCooldown = _enemy.maxAttackCooldown
+	function updateStatus(_EnemyType) {
+		var _enemy = newstatus[_EnemyType]
+		status.name = _enemy.name
+		status.hp = _enemy.hpMax
+		status.hpMax = _enemy.hpMax
+		status.damage = _enemy.damage
+		status.defense = _enemy.defense
+		status.color = _enemy.color
+		status.spd = _enemy.spd
+		status.atk1Name = _enemy.atk1Name
+		status.atk2Name = _enemy.atk2Name
+		status.maxAttackCooldown = _enemy.maxAttackCooldown
 	}
-	 updateStatus()
+	
+	if (Type != noone) { updateStatus(Type) }
+	else { updateStatus(GAMECONTROLLER.enemyBattle.Type) }
 #endregion
 
 #region Combat Functions
 	function reciveDamage(_Damage) {
-		EnemyStatus.hp -= abs(_Damage - EnemyStatus.defense)
+		status.hp -= abs(_Damage - status.defense)
+		
+		if (status.hp <= 0)
+			die()
+	}
+	
+	function die() {
+		array_push(GAMECONTROLLER.enemydefeated, GAMECONTROLLER.enemyBattle)
+		room_goto(rTest)
 	}
 
 	function fristAttack() {
-		oPlayer.reciveDamage(EnemyStatus.damage)
-		oCombatSystem.newAction(EnemyStatus.name, EnemyStatus.atk1Name)
+		oPlayer.reciveDamage(status.damage)
+		oCombatSystem.newAction(status.name, status.atk1Name)
 		maxAttack += 1
 	}
 	
 	function SecoundAttack() {
-		oPlayer.reciveDamage(EnemyStatus.damage * 1.5)
-		oCombatSystem.newAction(EnemyStatus.name, EnemyStatus.atk2Name)
+		oPlayer.reciveDamage(status.damage * 1.5)
+		oCombatSystem.newAction(status.name, status.atk2Name)
 	}
 #endregion
 
 #region Enemy State
-	 enum EnemyState {
-		Patrol,
-		Chasing, 
-		Escaping
-	 }
+	enum EnemyState {
+	    Patrol,
+	    Chasing, 
+	    Escaping
+	}
 	state = EnemyState.Patrol
-	 
-	 originX = x
-	 originY = x
-	 distanceVariableX = 140
-	 leftDir = true
-	 idleEnemy = false
-	 idleCooldown = 0
-	 idleMaxCooldown = 200
-	 hasReachedLimit = false
-	
-	 function enemyState() {
-		 if (global.inCombat)
-			exit
-			
-		var _dist = distance_to_object(oPlayer)
-		switch(state) {
-			case EnemyState.Patrol:
-				if (x >= originX + distanceVariableX and not hasReachedLimit) {
-				    leftDir = true
-				    idleEnemy = irandom(100) <= 50
-				    hasReachedLimit = true
-				}
-				else if (x <= originX - distanceVariableX and not hasReachedLimit) {
-				    leftDir = false
-				    idleEnemy = irandom(100) <= 50
-				}
 
-				if (x < originX + distanceVariableX - 10 and x > originX - distanceVariableX + 10)
-				    hasReachedLimit = false
+	originX = x
+	distanceVariableX = 140
+	leftDir = true
+	idleEnemy = false
+	idleCooldown = 0
+	idleMaxCooldown = 200
 
-				if (not idleEnemy) {
-				    if (leftDir)
-				        x -= EnemyStatus.spd / 2.5
-				    else
-				        x += EnemyStatus.spd / 2.5
-				} else {
-				    if (idleCooldown <= 0) {
-				        idleEnemy = false
-				        idleCooldown = idleMaxCooldown
-				    }
-				    idleCooldown--
-				}
-				break
-				
-			case EnemyState.Chasing:
-				if (_dist <= detectPlayer) {
-					var _dir = point_direction(x, y, oPlayer.x, oPlayer.y)
-					x += lengthdir_x(EnemyStatus.spd, _dir)
-					y += lengthdir_y(EnemyStatus.spd, _dir)
-				}
-				else 
-					state = EnemyState.Patrol	
+	detectionCooldown = 0
+	detectionCooldownMax = 120
+	alertDistance = detectPlayer / 2.5 
 
-				if (_dist <= 0)
-					room_goto(rCombat)
-				break
-				
-			case EnemyState.Escaping:
-				break
-		}
-	 }
+	function enemyState() {
+	    if (global.inCombat)
+	        exit
+    
+	    if (detectionCooldown > 0)
+	        detectionCooldown--
+        
+	    var _dist = distance_to_object(oPlayer)
+	    var _idlechance = 60
+    
+	    var _alertDetection = (_dist <= alertDistance)
+	    var _normalDetection = (_dist <= detectPlayer and detectionCooldown <= 0)
+    
+	    switch(state) {
+	        case EnemyState.Patrol:
+	            if (x >= originX + distanceVariableX) {
+	                leftDir = true
+	                idleEnemy = irandom(100) <= _idlechance
+	            }
+	            else if (x <= originX - distanceVariableX) {
+	                leftDir = false
+	                idleEnemy = irandom(100) <= _idlechance
+	            }
+            
+	            if (_alertDetection or _normalDetection)
+	                state = escape ? EnemyState.Escaping : EnemyState.Chasing
+            
+	            if (not idleEnemy) {
+	                x += leftDir ? -status.spd / 2.5 : status.spd / 2.5
+	            } else {
+	                if (idleCooldown <= 0) {
+	                    idleEnemy = false
+	                    idleCooldown = idleMaxCooldown
+	                }
+	                idleCooldown--
+	            }
+	            break
+            
+	        case EnemyState.Chasing:
+	            if (_dist <= detectPlayer) {
+	                var _dir = point_direction(x, y, oPlayer.x, oPlayer.y)
+	                x += lengthdir_x(status.spd, _dir)
+	                y += lengthdir_y(status.spd, _dir)
+	            } else {
+	                originX = x
+	                state = EnemyState.Patrol
+	                detectionCooldown = detectionCooldownMax
+	            }
+            
+	            if (_dist <= 0) {
+					GAMECONTROLLER.enemyBattle = self
+	                room_goto(rCombat)
+				}
+	            break
+            
+	        case EnemyState.Escaping:
+	            if (_dist <= detectPlayer) {
+	                var _dir = point_direction(x, y, oPlayer.x, oPlayer.y)
+	                x -= lengthdir_x(status.spd / 1.2, _dir)
+	                y -= lengthdir_y(status.spd / 1.2, _dir)
+	            } else {
+	                originX = x
+	                state = EnemyState.Patrol
+	                detectionCooldown = detectionCooldownMax
+	            }
+            
+	            if (_dist <= 0) {
+					GAMECONTROLLER.enemyBattle = self
+	                room_goto(rCombat)
+				}
+	            break
+	    }
+	}
 #endregion

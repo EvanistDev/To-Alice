@@ -1,26 +1,37 @@
-playerStatus = {
-	name: "Eva",
-	hp: 10,
+status = {
+	name: "Alice",
+	hp: 100,
 	hpMax: 10,
-	damage: 2,
+	damage: 20,
 	defense: 0,
 }
 
 spd = 8 
 ActionTime = false
 
+/*Test*/
+if (instance_exists(oCombatSystem))
+	ActionTime = true
+
 #region Combat Functions
 	function reciveDamage(_Damage) {
-		playerStatus.hp -= abs(_Damage - playerStatus.defense)
+		status.hp -= abs(_Damage - status.defense)
+		
+		if (status.hp <= 0)
+			die()
+	}
+	
+	function die() {
+		
 	}
 
 	function fristAttack() {
-		oGenericEnemy.reciveDamage(playerStatus.damage)
-		oCombatSystem.newAction(playerStatus.name, "Erh...")
+		oGenericEnemy.reciveDamage(status.damage)
+		oCombatSystem.newAction(status.name, "FRIST")
 	}
 
 	function SecoundAttack() {
-		oGenericEnemy.reciveDamage(playerStatus.damage * 1.5)
-		oCombatSystem.newAction(playerStatus.name, "FDS")
+		oGenericEnemy.reciveDamage(status.damage * 2)
+		oCombatSystem.newAction(status.name, "SECOUND")
 	}
 #endregion
