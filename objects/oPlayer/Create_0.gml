@@ -1,3 +1,24 @@
+#region Dialogue Manager Setup
+global.dialogue_manager = new DialogueManager();
+
+var file_path = "dialogue.json";
+var file = file_text_open_read(file_path);
+
+if (file == -1) {
+    show_debug_message("Failed to open dialogue.json at " + file_path);
+} else {
+    var file_text = "";
+    while (!file_text_eof(file)) {
+        file_text += file_text_readln(file); 
+        file_text += "\n";
+    }
+    file_text_close(file);
+
+    global.dialogue_manager = new DialogueManager();
+    global.dialogue_manager.load_json(file_text);
+}
+#endregion
+
 status = {
 	name: "Alice",
 	hp: 100,
