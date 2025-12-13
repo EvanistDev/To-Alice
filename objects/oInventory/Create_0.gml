@@ -1,9 +1,11 @@
 #macro INVENTORY_SLOTS 18
 #macro INVENTORY_ROW_LENGTH 6
 #macro INVENTORY_MARGIN 6
-#macro INVENTORY_SLOT_SIZE sprite_get_width(sPlayer)
+#macro INVENTORY_SLOT_SIZE sprite_get_width(slot_sprite)
 #macro INVENTORY_SLOT_PADDING 12
 #macro INVENTORY_SLOT_COUNT_PADDING 4
+
+#macro EQUIP_SLOT_COUNT EQUIPMENT_TYPE.COUNT
 
 background_sprite = sSlime;
 slot_sprite = sPlayer;

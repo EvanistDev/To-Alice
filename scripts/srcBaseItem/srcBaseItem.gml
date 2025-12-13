@@ -1,4 +1,5 @@
-function BaseItem(_item_id, _item_type, _stack_amount, _sprite) constructor {
+function BaseItem(_item_id, _item_type, _stack_amount, _sprite) constructor 
+{
 	
 	self.item_id = _item_id;
 	self.item_type = _item_type;
