@@ -1,12 +1,3 @@
-if (global.dialogue_manager.active) exit;
-
-// Test Code Remove Me
-if (keyboard_check_pressed(vk_space)) {
-	create_dialogue("intro", function() {
-    show_debug_message("Dialogue finished!");
-});
-}
-
 #region Movimentação
 	var _eixoX = keyboard_check(ord("D")) - keyboard_check(ord("A"))
 	var _eixoY = keyboard_check(ord("S")) - keyboard_check(ord("W"))
@@ -17,8 +8,58 @@ if (keyboard_check_pressed(vk_space)) {
 	var moveDirX = lengthdir_x(len, dir)
 	var moveDirY = lengthdir_y(len, dir)
 	
-	if (not global.inCombat) {
+	if (not global.inCombat and not global.dialogue_manager.active) {
 		x += moveDirX
 		y += moveDirY
+		
+		if (moveDirX != 0) {
+			sprite_index = sAliceRun
+			image_xscale = scale * sign(moveDirX)
+		} else
+			sprite_index = sAliceIdle
+	} 
+#endregion
+
+#region combat Effects
+	if (hitShake) {
+		hitFlashTimer--
+	
+		x = originalX + random_range(-hitShakeIntensity, hitShakeIntensity)
+		y = originalY + random_range(-hitShakeIntensity, hitShakeIntensity)
+		hitShakeIntensity = lerp(hitShakeIntensity, 0, 0.15)
+	
+		if (hitShakeTime <= 0) {
+			hitShake = false
+			x = originalX
+			y = originalY
+		}
+	}
+
+	if (hitFlash) {
+		hitFlashTimer--
+		if (hitFlashTimer <= 0 )
+			hitFlash = false
+	}
+	
+	if (showDamage) {
+		damageTimer--
+		damageY -= 1.5  
+		damageAlpha = damageTimer / damageDuration  // Fade out
+			
+		if (damageTimer <= 0)
+			showDamage = false
 	}
 #endregion
+
+if (sprite_index == sAliceDying) {
+	if (image_index >= image_number) {
+		image_speed = 0
+		
+		if CooldownDie <= 0 {
+			/*Fazer voltar ao ultimo save*/
+			CooldownDie = maxCooldownDie
+			room_goto(rTest)
+		}
+		CooldownDie--
+	}
+}

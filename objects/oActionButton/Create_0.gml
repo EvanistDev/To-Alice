@@ -1,5 +1,5 @@
 function buttonPressed() {
-	if (oPlayer.ActionTime) {
+	if (oPlayer.ActionTime and not global.dialogue_manager.active and oPlayer.status.hp > 0) {
 		switch (choiceAttack) {
 			case 0:
 				oPlayer.fristAttack()
