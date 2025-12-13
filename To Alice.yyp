@@ -39,7 +39,7 @@
     {"id":{"name":"oMouse","path":"objects/oMouse/oMouse.yy",},},
     {"id":{"name":"oPlayer","path":"objects/oPlayer/oPlayer.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
-    {"id":{"name":"srcBaseEquipmentItem","path":"scripts/srcBaseEquipmentItem/srcBaseEquipmentItem.yy",},},
+    {"id":{"name":"srcBaseEquipment","path":"scripts/srcBaseEquipment/srcBaseEquipment.yy",},},
     {"id":{"name":"srcBaseItem","path":"scripts/srcBaseItem/srcBaseItem.yy",},},
     {"id":{"name":"srcDialogue","path":"scripts/srcDialogue/srcDialogue.yy",},},
     {"id":{"name":"srcDialogueManager","path":"scripts/srcDialogueManager/srcDialogueManager.yy",},},

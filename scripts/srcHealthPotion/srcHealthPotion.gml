@@ -1,6 +1,8 @@
 function HealthPotion() : 
 BaseItem(
 	ITEM_ID.HEALTH_POTION, 
+	"Health Potion",
+	"Print to the console.",
 	ITEM_TYPES.CONSUMABLES, 
 	4,
 	sTestItem

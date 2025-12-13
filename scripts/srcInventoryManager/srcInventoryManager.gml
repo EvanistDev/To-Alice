@@ -4,16 +4,14 @@ function InventoryManager(_inventory_slots) constructor
 	
 	self.inventory = [];
 	for (var i = 0; i < self.inventory_slots; i++)
-	{
-	    self.inventory[i] = new InventorySlot(i, ITEM_TYPES.ANY);
-	}
+		self.inventory[i] = new InventorySlot(i, ITEM_TYPES.ANY);
 	
-	if (!instance_exists(oInventory)) {
+	
+	if (!instance_exists(oInventory)) 
         _inst = instance_create_depth(0, 0, 0, oInventory);
-    } else {
+    else
         _inst = oInventory;
-    }
-	
+    
 	function _add_existing(slot_id, amount, item_id) 
 	{
 		var leftover = -1;
@@ -151,4 +149,41 @@ function InventoryManager(_inventory_slots) constructor
 
 	    return true;
 	}
+	
+	#region Equipment
+	self.equipment = [];
+    for (var i = 0; i < EQUIPMENT_TYPE.COUNT; i++)
+        self.equipment[i] = new InventorySlot(i, ITEM_TYPES.EQUIPMENT)
+	
+	function equip_item(slot_id, equip_type)
+	{
+	    var slot = self.inventory[slot_id];
+	    if (slot.is_empty()) return false;
+
+	    if (slot.item.item_type != ITEM_TYPES.EQUIPMENT) return false;
+
+	    self.equipment[equip_type].item = self.inventory[slot_id].item;
+		self.equipment[equip_type].amount = 1;
+		
+	    self.inventory[slot_id] = new InventorySlot(slot_id, ITEM_TYPES.ANY);
+
+	    return true;
+	}
+	
+	function unequip_item(equip_type)
+	{
+	    if (self.equipment[equip_type].is_empty()) return false;
+		
+		add(self.equipment[equip_type].item.item_id, 1); 
+	    self.equipment[equip_type].clear();
+		
+		return true;
+	}
+	
+	function get_equipment(equip_type) 
+	{
+		return self.equipment[equip_type].item;
+	}
+	
+	#endregion
 }

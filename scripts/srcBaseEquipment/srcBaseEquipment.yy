@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"srcBaseEquipmentItem",
+  "%Name":"srcBaseEquipment",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"srcBaseEquipmentItem",
+  "name":"srcBaseEquipment",
   "parent":{
     "name":"InventorySystem",
     "path":"folders/Scripts/InventorySystem.yy",

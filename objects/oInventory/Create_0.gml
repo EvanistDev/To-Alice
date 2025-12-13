@@ -20,9 +20,21 @@ panel_h = 2 * INVENTORY_MARGIN + rows * INVENTORY_SLOT_SIZE + (rows - 1) * INVEN
 panel_x = (display_get_gui_width()  - panel_w) * 0.5;
 panel_y = (display_get_gui_height() - panel_h) * 0.5;
 
+equip_panel_w = INVENTORY_SLOT_SIZE + INVENTORY_MARGIN * 2;
+equip_panel_h =
+    EQUIP_SLOT_COUNT * INVENTORY_SLOT_SIZE +
+    (EQUIP_SLOT_COUNT - 1) * INVENTORY_SLOT_PADDING +
+    INVENTORY_MARGIN * 2;
+
+equip_panel_x = panel_x + panel_w + 32;
+equip_panel_y = panel_y + panel_h * 0.5 - equip_panel_h * 0.5;
+
 open_key = "I";
 showing_inventory = false;
 
 dragging_slot = -1;
 drag_offset_x = 0;
 drag_offset_y = 0;
+
+hovered_slot = -1;
+hovered_is_equip = false;

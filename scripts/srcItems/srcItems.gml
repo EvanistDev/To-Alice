@@ -29,6 +29,19 @@ enum EQUIPMENT_TYPE
 	COUNT
 }
 
+function item_type_to_action(item_type) 
+{
+	switch(item_type) 
+	{
+		case ITEM_TYPES.CONSUMABLES:
+			return "Use";
+		case ITEM_TYPES.EQUIPMENT:
+			return "Equip";
+	}
+	
+	return undefined;
+}
+
 function make_item(_id)
 {
 	switch (_id)
