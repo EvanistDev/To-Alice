@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"srcInventorySlot",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"srcInventorySlot",
+  "parent":{
+    "name":"InventorySystem",
+    "path":"folders/Scripts/InventorySystem.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

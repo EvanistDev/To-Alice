@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"sDialogue",
+  "%Name":"srcTestWeapon",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"sDialogue",
+  "name":"srcTestWeapon",
   "parent":{
-    "name":"DialogueSystem",
-    "path":"folders/Scripts/DialogueSystem.yy",
+    "name":"Items",
+    "path":"folders/Scripts/Items.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

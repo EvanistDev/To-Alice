@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"srcHealthPotion",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"srcHealthPotion",
+  "parent":{
+    "name":"Items",
+    "path":"folders/Scripts/Items.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
