@@ -1,0 +1,6 @@
+Melhorar o sistema de save 
+quero fazer uma forma melhor quando a pessoa entrar no jogo somente carregar o idioma
+se ela colocar pra continuar carrega o resto...
+
+Arrumar a camera ;-; tá uma merda, porém vai ficar assim até eu ter paciencia ...
+possivelmente vai ser uma camera de 640 X 360 

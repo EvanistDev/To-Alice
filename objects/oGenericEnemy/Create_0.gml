@@ -14,7 +14,8 @@ status = {
 	color: noone
 }
 
-attackCooldownMax = 50
+iid = id
+attackCooldownMax = 30
 attackCooldown = attackCooldownMax
 ActionTime = false
 maxAttack = 0
@@ -23,8 +24,12 @@ escape = false
 
 for (var i = 0; i < array_length(GAMECONTROLLER.enemydefeated); i++) {
 	var _defeated = GAMECONTROLLER.enemydefeated[i]
-	if (_defeated.id == id)
-		instance_destroy()
+	if (variable_instance_exists(self, "iid")) {
+		if (_defeated.iid == id) {
+			instance_destroy()
+			break
+		}
+	}
 }
 
 #region Enemy Type
@@ -67,10 +72,46 @@ for (var i = 0; i < array_length(GAMECONTROLLER.enemydefeated); i++) {
 	else { updateStatus(GAMECONTROLLER.enemyBattle.Type) }
 #endregion
 
-#region Combat Functions
+#region Combat 
+	hitShake = false
+	hitShakeTime = 0
+	hitshakeDuration = 10
+	hitShakeIntensity = 4
+	originalX = x
+	originalY = y
+	
+	hitFlash = false
+	hitFlashTimer = 0
+	hitFlashDuration = 4
+	
+	showDamage = false
+	damageValue = 0
+	damageY = 0
+	damageAlpha = 0
+	damageTimer = 0
+	damageDuration = 60
+	
 	function reciveDamage(_Damage) {
-		status.hp -= abs(_Damage - status.defense)
+		finalDamage = abs(_Damage - status.defense)
+		status.hp -= finalDamage
 		
+		/* Shake */
+		hitShake = true
+		hitShakeTime = hitFlashDuration
+		originalX = x
+		originalY = y
+		
+		/* Flash */
+		hitFlash = true
+		hitFlashTimer = hitFlashDuration
+		
+		/* Popup de Damage */
+		showDamage = true
+		damageValue = finalDamage
+		damageY = y - 30
+		damageAlpha = 1
+		damageTimer = damageDuration
+
 		if (status.hp <= 0)
 			die()
 	}
@@ -100,7 +141,6 @@ for (var i = 0; i < array_length(GAMECONTROLLER.enemydefeated); i++) {
 	}
 	state = EnemyState.Patrol
 
-	originX = x
 	distanceVariableX = 140
 	leftDir = true
 	idleEnemy = false
@@ -126,11 +166,11 @@ for (var i = 0; i < array_length(GAMECONTROLLER.enemydefeated); i++) {
     
 	    switch(state) {
 	        case EnemyState.Patrol:
-	            if (x >= originX + distanceVariableX) {
+	            if (x >= originalX + distanceVariableX) {
 	                leftDir = true
 	                idleEnemy = irandom(100) <= _idlechance
 	            }
-	            else if (x <= originX - distanceVariableX) {
+	            else if (x <= originalX - distanceVariableX) {
 	                leftDir = false
 	                idleEnemy = irandom(100) <= _idlechance
 	            }
@@ -155,7 +195,7 @@ for (var i = 0; i < array_length(GAMECONTROLLER.enemydefeated); i++) {
 	                x += lengthdir_x(status.spd, _dir)
 	                y += lengthdir_y(status.spd, _dir)
 	            } else {
-	                originX = x
+	                originalX = x
 	                state = EnemyState.Patrol
 	                detectionCooldown = detectionCooldownMax
 	            }
@@ -172,7 +212,7 @@ for (var i = 0; i < array_length(GAMECONTROLLER.enemydefeated); i++) {
 	                x -= lengthdir_x(status.spd / 1.2, _dir)
 	                y -= lengthdir_y(status.spd / 1.2, _dir)
 	            } else {
-	                originX = x
+	                originalX = x
 	                state = EnemyState.Patrol
 	                detectionCooldown = detectionCooldownMax
 	            }

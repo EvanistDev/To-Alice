@@ -1,31 +1,14 @@
-#region Dialogue Manager Setup
-global.dialogue_manager = new DialogueManager();
-
-var file_path = "dialogue.json";
-var file = file_text_open_read(file_path);
-
-if (file == -1) {
-    show_debug_message("Failed to open dialogue.json at " + file_path);
-} else {
-    var file_text = "";
-    while (!file_text_eof(file)) {
-        file_text += file_text_readln(file); 
-        file_text += "\n";
-    }
-    file_text_close(file);
-
-    global.dialogue_manager = new DialogueManager();
-    global.dialogue_manager.load_json(file_text);
-}
-#endregion
-
 status = {
 	name: "Alice",
 	hp: 100,
-	hpMax: 10,
+	hpMax: 100,
 	damage: 20,
 	defense: 0,
 }
+
+scale = 3
+image_xscale = scale
+image_yscale = scale
 
 spd = 8 
 ActionTime = false
@@ -35,15 +18,54 @@ if (instance_exists(oCombatSystem))
 	ActionTime = true
 
 #region Combat Functions
+	hitShake = false
+	hitShakeTime = 0
+	hitshakeDuration = 10
+	hitShakeIntensity = 4
+	originalX = x
+	originalY = y
+	
+	hitFlash = false
+	hitFlashTimer = 0
+	hitFlashDuration = 4
+	
+	showDamage = false
+	damageValue = 0
+	damageY = 0
+	damageAlpha = 0
+	damageTimer = 0
+	damageDuration = 60
+	
 	function reciveDamage(_Damage) {
-		status.hp -= abs(_Damage - status.defense)
+		finalDamage = abs(_Damage - status.defense)
+		status.hp -= finalDamage
+		
+		/* Shake */
+		hitShake = true
+		hitShakeTime = hitFlashDuration
+		originalX = x
+		originalY = y
+		
+		/* Flash */
+		hitFlash = true
+		hitFlashTimer = hitFlashDuration
+		
+		/* Popup de Damage */
+		showDamage = true
+		damageValue = finalDamage
+		damageY = y - 30
+		damageAlpha = 1
+		damageTimer = damageDuration
+		
+		maxCooldownDie = 20
+		CooldownDie = maxCooldownDie
 		
 		if (status.hp <= 0)
 			die()
 	}
 	
 	function die() {
-		
+		sprite_index = sAliceDying
 	}
 
 	function fristAttack() {

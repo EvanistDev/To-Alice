@@ -1,6 +1,6 @@
 hoveredObject = noone
 oldHover = noone
-mouseCollider = [oActionButton]
+mouseCollider = [oMenuButton, oActionButton]
 depth = -99
 
 function MouseCheck() {
