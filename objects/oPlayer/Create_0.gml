@@ -6,6 +6,7 @@ global.inventory_manager.add(ITEM_ID.HEALTH_POTION);
 global.inventory_manager.add(ITEM_ID.HEALTH_POTION);
 global.inventory_manager.add(ITEM_ID.HEALTH_POTION);
 global.inventory_manager.add(ITEM_ID.HEALTH_POTION);
+global.inventory_manager.add(ITEM_ID.HEALTH_POTION);
 
 #region Dialogue Manager Setup
 global.dialogue_manager = new DialogueManager();

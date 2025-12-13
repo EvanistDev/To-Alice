@@ -9,9 +9,29 @@ function InventorySlot(_slot_id, _hold_type) constructor {
 		return is_undefined(self.item);
 	}
 	
+	function is_full() 
+	{
+		return !is_empty() and self.amount >= self.item.stack_amount;
+	}
+	
+	function update_slot_id(slot_id) 
+	{
+		self.slot_id = slot_id;
+		if (!is_undefined(self.item)) 
+		{
+			self.item.slot_id = slot_id;
+		}
+	}
+	
 	function add(item, amount)  
 	{
 		if (self.hold_type != ITEM_TYPES.ANY and item.item_type != self.hold_type) return -1;
+		
+		if (is_undefined(item))
+		{
+			clear();
+			return;
+		}
 		
 		self.item = item;
 		self.item.slot_id = self.slot_id;

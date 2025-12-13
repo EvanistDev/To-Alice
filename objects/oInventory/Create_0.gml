@@ -20,3 +20,7 @@ panel_y = (display_get_gui_height() - panel_h) * 0.5;
 
 open_key = "I";
 showing_inventory = false;
+
+dragging_slot = -1;
+drag_offset_x = 0;
+drag_offset_y = 0;
