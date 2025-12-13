@@ -1,0 +1,22 @@
+#macro INVENTORY_SLOTS 18
+#macro INVENTORY_ROW_LENGTH 6
+#macro INVENTORY_MARGIN 6
+#macro INVENTORY_SLOT_SIZE sprite_get_width(sPlayer)
+#macro INVENTORY_SLOT_PADDING 12
+#macro INVENTORY_SLOT_COUNT_PADDING 4
+
+background_sprite = sSlime;
+slot_sprite = sPlayer;
+
+slots = INVENTORY_SLOTS;
+rows  = ((slots - 1) div INVENTORY_ROW_LENGTH) + 1;
+slot_offset = INVENTORY_SLOT_SIZE * 0.5;
+
+panel_w = 2 * INVENTORY_MARGIN + INVENTORY_ROW_LENGTH * INVENTORY_SLOT_SIZE + (INVENTORY_ROW_LENGTH - 1) * INVENTORY_SLOT_PADDING;
+panel_h = 2 * INVENTORY_MARGIN + rows * INVENTORY_SLOT_SIZE + (rows - 1) * INVENTORY_SLOT_PADDING;
+
+panel_x = (display_get_gui_width()  - panel_w) * 0.5;
+panel_y = (display_get_gui_height() - panel_h) * 0.5;
+
+open_key = "I";
+showing_inventory = false;

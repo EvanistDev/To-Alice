@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"sDialogueManager",
+  "%Name":"srcDialogueManager",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"sDialogueManager",
+  "name":"srcDialogueManager",
   "parent":{
     "name":"DialogueSystem",
     "path":"folders/Scripts/DialogueSystem.yy",

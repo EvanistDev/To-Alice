@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"sDialogue",
+  "%Name":"srcBaseItem",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"sDialogue",
+  "name":"srcBaseItem",
   "parent":{
-    "name":"DialogueSystem",
-    "path":"folders/Scripts/DialogueSystem.yy",
+    "name":"InventorySystem",
+    "path":"folders/Scripts/InventorySystem.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
