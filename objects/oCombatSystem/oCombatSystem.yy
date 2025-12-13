@@ -9,8 +9,8 @@
   "name":"oCombatSystem",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Controller",
+    "path":"folders/Objects/Controller.yy",
   },
   "parentObjectId":null,
   "persistent":false,
