@@ -17,4 +17,36 @@
 	}
 #endregion
 
+#region combat Effects
+	if (hitShake) {
+		hitShakeTime--
+		
+		x = originalX + random_range(-hitShakeIntensity, hitShakeIntensity)
+		y = originalY + random_range(-hitShakeIntensity, hitShakeIntensity)
+		hitShakeIntensity = lerp(hitShakeIntensity, 0, 0.15)
+		
+	
+		if (hitShakeTime <= 0) {
+			hitShake = false
+			x = originalX
+			y = originalY
+		}
+	}
+
+	if (hitFlash) {
+		hitFlashTimer--
+		if (hitFlashTimer <= 0 )
+			hitFlash = false
+	}
+	
+	if (showDamage) {
+		damageTimer--
+		damageY -= 1.5  
+		damageAlpha = damageTimer / damageDuration  // Fade out
+			
+		if (damageTimer <= 0)
+			showDamage = false
+		}
+#endregion
+
 enemyState()

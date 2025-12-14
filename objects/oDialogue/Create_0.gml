@@ -1,6 +1,6 @@
 dialogue_manager = global.dialogue_manager;
 
-dialogue_box_sprite = sPlayer
+dialogue_box_sprite = sDialog
 
 current_text = "";
 current_sprite = -1

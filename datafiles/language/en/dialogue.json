@@ -1,0 +1,73 @@
+{
+  "intro": [
+    {
+      "name": "Alice",
+      "msg": "Welcome to the game!",
+      "sprite": "sAliceHead"
+    },
+    {
+      "name": "Bob",
+      "msg": "Thanks! Excited to start!",
+      "sprite": "sSlime"
+    }
+  ],
+  "quest1": [
+    {
+      "name": "NPC",
+      "msg": "Find 10 apples.",
+      "sprite": "sAliceHead"
+    },
+    {
+      "name": "NPC",
+      "msg": "Return to me when done.",
+      "sprite": "sSlime"
+    }
+  ],
+  "ending": [
+    {
+      "name": "Alice",
+      "msg": "You did it!",
+      "sprite": "sSlime"
+    },
+    {
+      "name": "Bob",
+      "msg": "Congratulations!",
+      "sprite": "sAliceHead"
+    }
+  ],
+    "CombatStart1": [
+    {
+      "name": "Alice",
+      "msg": "Come here, monster... I will defeat you.",
+      "sprite": "sAliceHead"
+    }
+  ],
+      "CombatStart2": [
+    {
+      "name": "Alice",
+      "msg": "Stay back, monster! I-I'm not scared of you!",
+      "sprite": "sAliceHead"
+    }
+  ],
+      "CombatStart3": [
+    {
+      "name": "Alice",
+      "msg": "I-I have to protect everyone... like in the stories!",
+      "sprite": "sAliceHead"
+    }
+  ],
+      "CombatStart4": [
+    {
+      "name": "Alice",
+      "msg": "Heroes don't run away... right?",
+      "sprite": "sAliceHead"
+    }
+  ],
+        "CombatStart5": [
+    {
+      "name": "Alice",
+      "msg": "Come on, Alice... you can do this...",
+      "sprite": "sAliceHead"
+    }
+  ]
+}
